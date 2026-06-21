@@ -73,12 +73,14 @@ export const getStudentQuizzes =
       await pool.query(
         `
         SELECT
-          q.*
-        FROM quizzes q
-        JOIN enrollments e
-          ON q.subject_id = e.subject_id
-        WHERE e.user_id = $1
-        ORDER BY q.deadline
+            q.*
+          FROM quizzes q
+          JOIN enrollments e
+            ON q.subject_id = e.subject_id
+          WHERE
+            e.user_id = $1
+            AND e.is_paid = TRUE
+          ORDER BY q.id
         `,
         [userId]
       );

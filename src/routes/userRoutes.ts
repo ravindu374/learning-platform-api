@@ -24,6 +24,7 @@ router.get(
   getUsers
 );
 
+
 export default router;
 
 router.delete(

@@ -80,7 +80,9 @@ export const getStudentClasses =
         FROM classes c
         JOIN enrollments e
           ON c.subject_id = e.subject_id
-        WHERE e.user_id = $1
+        WHERE
+          e.user_id = $1
+          AND e.is_paid = TRUE
         ORDER BY c.class_date
         `,
         [userId]

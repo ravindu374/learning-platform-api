@@ -70,6 +70,7 @@ export const login = async (
       id: user.id,
       role: user.role,
       name: user.name,
+      is_paid: user.is_paid,
     });
   } catch (error) {
     console.error(error);
@@ -87,12 +88,11 @@ export const register = async (
 ) => {
 
   try {
-
+    console.log(req.body);
     const {
       name,
       email,
       password,
-      role,
     } = req.body;
 
     const existingUser =
@@ -144,7 +144,7 @@ export const register = async (
           name,
           email,
           hashedPassword,
-          role,
+          "student",
         ]
       );
 
@@ -152,15 +152,18 @@ export const register = async (
       result.rows[0]
     );
 
-  } catch (error) {
+  } catch (error: any) {
 
-    console.error(error);
+  console.error(
+    "REGISTER ERROR:",
+    error
+  );
 
-    res.status(500).json({
-      message:
-        "Registration failed",
-    });
+  res.status(500).json({
+    message:
+      error.message,
+  });
 
-  }
+}
 
 };

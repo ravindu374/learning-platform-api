@@ -9,6 +9,9 @@ import classRoutes from "./routes/classRoutes";
 import quizRoutes from "./routes/quizRoutes";
 import announcementRoutes from "./routes/announcementRoutes";
 import enrollmentRoutes from "./routes/enrollmentRoutes";
+import paymentRoutes from "./routes/paymentRoutes";
+
+
 
 dotenv.config();
 
@@ -36,6 +39,8 @@ app.use("/api/quizzes", quizRoutes);
 app.use("/api/announcements", announcementRoutes);
 
 app.use("/api/enrollments", enrollmentRoutes);
+
+app.use( "/api/payments", paymentRoutes );
 
 app.get("/", (_, res) => {
   res.json({

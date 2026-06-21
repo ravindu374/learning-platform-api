@@ -85,12 +85,14 @@ export const deleteAnnouncement =
       await pool.query(
         `
         SELECT
-          a.*
-        FROM announcements a
-        JOIN enrollments e
-          ON a.subject_id = e.subject_id
-        WHERE e.user_id = $1
-        ORDER BY a.id DESC
+            a.*
+          FROM announcements a
+          JOIN enrollments e
+            ON a.subject_id = e.subject_id
+          WHERE
+            e.user_id = $1
+            AND e.is_paid = TRUE
+          ORDER BY a.id DESC
         `,
         [userId]
       );
